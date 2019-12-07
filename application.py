@@ -81,14 +81,17 @@ def users():
     userRows = db.execute("SELECT * FROM users;")
     userRowsObject = []
     for user in userRows:
+        totalWrestlers = db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+        topWrestler: db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+        totalWins: db.execute("SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+        totalLosses: db.execute("SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
         userItem = {
             "username": user['username'],
             "points": user['points'],
-            # TODO fix this
-            "totalWrestlers": (db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['name']),
-            "topWrestler": (db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['name']),
-            "totalWins": (db.execute("SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['totalWins']),
-            "totalLosses": (db.execute("SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['totalLosses']),
+            "totalWrestlers": totalWrestlers[0]['COUNT(*)'],
+            "topWrestler": topWrestler[0]['name'],
+            "totalWins": totalWins[0]['totalWins'],
+            "totalLosses": totalLosses[0]['totalLosses']
         }
         userRowsObject.append(userItem)
         userRowsObject.sort(key=operator.itemgetter('points'), reverse=True)
