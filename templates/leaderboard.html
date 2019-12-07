@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Leader Board
+{% endblock %}
+
+{% block main %}
+    <h1>Leader Board</h1>
+    <p>Last Updated: {{now}}</p>
+    <img class="titleBelt" src="/static/images/titleBelt.jpg" alt="world title">
+    <p><span class="leader-blue">{{currentLeader}}</span> is the current heavyweight champion</p>
+        <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Wrestler</th>
+              <th scope="col">Wins</th>
+              <th scope="col">Loses</th>
+              <th scope="col">Level</th>
+            </tr>
+          </thead>
+          <tbody class="leaderBoard">
+        {% for wrestler in leaderBoardRows %}
+            <tr>
+              <td>#{{wrestler["rank"]}}</td>
+              <td>{{wrestler["name"]}}</td>
+              <td>{{wrestler["wins"]}}</td>
+              <td>{{wrestler["losses"]}}</td>
+              <td>{{wrestler["level"]}}</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+        </div>
+            <p></p>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                  <div class="card border-dark mb-3" style="max-width: 20rem;">
+                  <div class="card-header">Tip</div>
+                  <d  iv class="card-body text-dark">
+                    <h5 class="card-title">Leveling Up</h5>
+                      <p class="card-text">{{tips}}</p>
+                  </div>
+               </div>
+                <div class="col">
+                </div>
+            </div>
+{% endblock %}

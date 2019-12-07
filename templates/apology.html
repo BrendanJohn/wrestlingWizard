@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <div class="alert alert-danger">
+      <strong>{{top}} Error</strong>
+      <p>{{bottom}}</p>
+      <p>{{code}}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create a Wrestler
+{% endblock %}
+
+{% block main %}
+        <h2>Create a Wrestler</h2>
+        <p></p>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+             <form action="/create" method="post">
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="name" id="name" placeholder="name" type="text" required>
+                </div>
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="specialMove" id="specialMove" placeholder="special move" type="text" required>
+                </div>
+                <div class="form-group">
+                    Strength: (Between 1 and 20)
+                    <input autocomplete="off" autofocus class="form-control" name="strength" id="strength" type="number" min="1" max="20" required>
+                </div>
+                <div class="form-group">
+                    Speed: (Between 1 and 20)
+                    <input autocomplete="off" autofocus class="form-control" name="speed" id="speed" type="number" min="1" max="20" required>
+                </div>
+                <p id="passwordWarning" class="d-none warning-text">Speed and Strength may not exceed 20</p>
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="finishingMove" id="finishingMove" placeholder="finishingMove" type="text" required>
+                </div>
+                <button class="btn btn-primary" type="submit" id="submit" disabled>Create Wrestler</button>
+            </form>
+                <p></p>
+                <button type="button" class="btn btn-success" id="random" class="random">Random</button>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+            <p></p>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                  <div class="card border-dark mb-3" style="max-width: 20rem;">
+                  <div class="card-header">Tip</div>
+                  <d  iv class="card-body text-dark">
+                    <h5 class="card-title">Leveling Up</h5>
+                      <p class="card-text">{{tips}}</p>
+                  </div>
+               </div>
+                <div class="col">
+                </div>
+            </div>
+    <script>
+        document.querySelector('#speed').onclick = function() {
+                if (parseInt(document.querySelector('#speed').value) + parseInt(document.querySelector('#strength').value) <= 20 ||
+                isNaN(parseInt(document.querySelector('#speed').value))) {
+                    document.querySelector("button[type='submit']").setAttribute("enabled", "enabled");
+                    document.querySelector("button[type='submit']").removeAttribute("disabled");
+                    $('#passwordWarning').removeClass('d-block').addClass('d-none');
+                }
+                else {
+                $('#passwordWarning').removeClass('d-none').addClass('d-block');
+                document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                document.querySelector("button[type='submit']").removeAttribute("enabled");
+            }
+        }
+        document.querySelector('#strength').onclick = function() {
+                if (parseInt(document.querySelector('#speed').value) + parseInt(document.querySelector('#strength').value) <= 20 ||
+                isNaN(parseInt(document.querySelector('#strength').value))) {
+                    document.querySelector("button[type='submit']").setAttribute("enabled", "enabled");
+                    document.querySelector("button[type='submit']").removeAttribute("disabled");
+                    $('#passwordWarning').removeClass('d-block').addClass('d-none');
+                }
+                else {
+                $('#passwordWarning').removeClass('d-none').addClass('d-block');
+                document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                document.querySelector("button[type='submit']").removeAttribute("enabled");
+            }
+        }
+
+        function random_number(items){
+            return items[Math.floor(Math.random()*items.length)];
+        }
+        var items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        function random_name(names){
+            return names[Math.floor(Math.random()*names.length)];
+        }
+        var names = ["Walrus Man", "Octopus Man", "Jake The Snake", "Sandman", "Bam Bam Bigelow", "Bucktooth Billy", "Magic Pants", "King Kong Bundy", "Big Boss Man"];
+
+        function random_move(moves){
+            return moves[Math.floor(Math.random()*moves.length)];
+        }
+        var moves = ["DDT", "Spinebuster", "Barbed Wire Bat", "Russin Leg Sweep", "Moonsault", "Awesome Bomb", "Camel Clutch", "Mandible Claw", "Hip Toss"];
+
+        document.getElementById('random').onclick = function () {
+              $("#name").val(random_name(names));
+              $("#specialMove").val(random_move(moves));
+              $("#finishingMove").val(random_move(moves));
+              document.querySelector('#speed').value = random_number(items);
+              document.querySelector('#strength').value = random_number(items);
+                if (parseInt(document.querySelector('#speed').value) + parseInt(document.querySelector('#strength').value) <= 20 ||
+                isNaN(parseInt(document.querySelector('#strength').value))) {
+                    document.querySelector("button[type='submit']").setAttribute("enabled", "enabled");
+                    document.querySelector("button[type='submit']").removeAttribute("disabled");
+                    $('#passwordWarning').removeClass('d-block').addClass('d-none');
+                }
+                else {
+                $('#passwordWarning').removeClass('d-none').addClass('d-block');
+                document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                document.querySelector("button[type='submit']").removeAttribute("enabled");
+            }
+            }
+    </script>
+{% endblock %}

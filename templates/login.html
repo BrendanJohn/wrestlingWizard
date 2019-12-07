@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    No Wrestlers
+{% endblock %}
+
+{% block main %}
+    <form action="/login" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+        <p></p>
+        <p>New here? Why not <a href="/register">create</a> an account</p>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                 <div class="card border-dark mb-3" style="max-width: 20rem;">
+                 <div class="card-header">Tip</div>
+                 <d  iv class="card-body text-dark">
+                <h5 class="card-title">Leveling Up</h5>
+                     <p class="card-text">{{tips}}</p>
+                 </div>
+              </div>
+            <div class="col">
+            </div>
+        </div>
+{% endblock %}

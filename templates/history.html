@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Match History
+{% endblock %}
+
+{% block main %}
+    <h1>Match History</h1>
+    <p>Most recent 25 matches</p>
+        <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="winner">Winner</th>
+              <th scope="col">Loser</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+        {% for match in matchHistory %}
+            <tr>
+              <td >{{match["winnerName"]}}</td>
+              <td>{{match["loserName"]}}</td>
+              <td>{{match["date"]}}</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+        </div>
+{% endblock %}

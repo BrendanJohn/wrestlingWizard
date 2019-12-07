@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input id="userName" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input id="password" class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input id="confirmation" class="form-control" name="confirmation" placeholder="Password Confirmation" type="password">
+            <p id="passwordWarning" class="d-none warning-text">Passwords don't match or are blank</p>
+        </div>
+        <button id="submitButton" class="btn btn-primary" disabled type="submit">Register</button>
+    </form>
+    <p></p>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                 <div class="card border-dark mb-3" style="max-width: 20rem;">
+                 <div class="card-header">Tip</div>
+                 <d  iv class="card-body text-dark">
+                <h5 class="card-title">Leveling Up</h5>
+                     <p class="card-text">{{tips}}</p>
+                 </div>
+              </div>
+            <div class="col">
+            </div>
+        </div>
+    <script>
+        document.querySelector('#userName').onkeyup = function() {
+            //username empty, disable button
+            if (document.querySelector('#userName').value == '') {
+                document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                document.querySelector("button[type='submit']").removeAttribute("enabled");
+            }
+            //else enable button
+            else {
+                //passwords match, enable button and hide warning
+                if (document.querySelector('#confirmation').value == document.querySelector('#password').value && document.querySelector('#password').value != '') {
+                    document.querySelector("button[type='submit']").setAttribute("enabled", "enabled");
+                    document.querySelector("button[type='submit']").removeAttribute("disabled");
+                }
+            //else show warning and disable button
+            else {
+                $('#passwordWarning').removeClass('d-none').addClass('d-block');
+                document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                document.querySelector("button[type='submit']").removeAttribute("enabled");
+            }
+            }
+        }
+
+        document.querySelector('#confirmation').onkeyup = function() {
+            //passwords match, enable button and hide warning
+            if (document.querySelector('#confirmation').value == document.querySelector('#password').value && document.querySelector('#password').value != ''){
+                $('#passwordWarning').removeClass('d-block').addClass('d-none');
+                //username empty, disable button
+                if (document.querySelector('#userName').value == '') {
+                    document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                    document.querySelector("button[type='submit']").removeAttribute("enabled");
+                }
+                //else enable button
+                else {
+                    document.querySelector("button[type='submit']").setAttribute("enabled", "enabled");
+                    document.querySelector("button[type='submit']").removeAttribute("disabled");
+                }
+            }
+            //else show warning and disable button
+            else {
+                $('#passwordWarning').removeClass('d-none').addClass('d-block');
+                document.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+                document.querySelector("button[type='submit']").removeAttribute("enabled");
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Match
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h2>Match Setup</h2>
+        <p>{{outcome}}</p>
+        <div class="row">
+            <div class="col-md-4">
+                <form action="/match" method="post">
+                    <div class="form-group">
+                      <label for="sel1">Choose your wrestler (select one):</label>
+                      <select name="wrestlerOne" class="form-control" id="sel1">
+                        {% for wrestler in myWrestlers %}
+                            <option value="{{wrestler["id"]}}">{{wrestler["name"]}} (level: {{wrestler["level"]}})</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <img id="playerOneImage" src="/static/images/playerOne.jpg" alt="wrestlers logo">
+            </div>
+            <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="sel1">Choose your opponent (select one):</label>
+                      <select id="opponent" name="wrestlerTwo" class="form-control" id="sel1">
+                        {% for wrestler in compWrestlers %}
+                            <option value="{{wrestler["id"]}}">{{wrestler["name"]}} (level: {{wrestler["level"]}})</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <img id="opponentImage" src="/static/images/ricFlair.jpg" alt="wrestlers logo">
+            </div>
+            <div class="col-md-4">
+                <p>Ready to Rumble!</p>
+                <button class="btn btn-primary"id="fight-button" type="submit">Fight!</button>
+            </form>
+            </div>
+        </div>
+        <div class="row match-outcome">
+          {% if overallResults %}
+          <div class="table-responsive">
+            <table id="results-table" class="table table-striped">
+              <thead>
+                <h3>Match Results:</h3>
+                <tr>
+                    <th scope="col" class="winner">Winner</th>
+                    <th scope="col" class="winner">Final Health Remaining</th>
+                    <th scope="col" class="winner">Total Moves</th>
+                    <th scope="col" class="winner">Final Blow</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td scope="col" class="table-success"><strong>{{overallResults["winnerName"]}}</strong></td>
+                    <td scope="col" class="table-success"><strong>{{overallResults["finalHealth"]}}</strong></td>
+                    <td scope="col" class="table-success"><strong>{{overallResults["totalMoves"]}}</strong></td>
+                    <td scope="col" class="table-success"><strong>{{overallResults["finalBlow"]}}</strong></td>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <table id="results-table" class="table table-striped">
+              <thead>
+                <h3>Match Details:</h3>
+                <tr>
+                  <th scope="col">Wrestler</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Wrestler</th>
+                  <th scope="col" class="damage">Damage</th>
+                  <th scope="col">Details</th>
+                  <th scope="col">Health</th>
+                </tr>
+              </thead>
+              <tbody class="matchBoard">
+                <tr>
+                  {% for event in matchEvents %}
+                    <td>{{event["attacker"]}}</td>
+                    <td>{{event["action"]}}</td>
+                    <td>{{event["victim"]}}</td>
+                    <td class="damage">{{event["damage"]}}</td>
+                    <td>{{event["bonus"]}}</td>
+                    <td>{{event["wrestlerOne"]}}: <strong>{{event["wrestlerOneHealth"]}}</strong> / {{event["wrestlerTwo"]}}: <strong>{{event["wrestlerTwoHealth"]}}</strong></td>
+                    <td></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+            </div>
+          </div>
+          {% endif %}
+          </div>
+            <p></p>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                  <div class="card border-dark mb-3">
+                  <div class="card-header">Tip</div>
+                  <d  iv class="card-body text-dark">
+                    <h5 class="card-title">Leveling Up</h5>
+                      <p class="card-text">{{tips}}</p>
+                  </div>
+               </div>
+                <div class="col">
+                </div>
+            </div>
+    </div>
+    <script>
+
+        selectWrestler = function () {
+                if (document.querySelector('#opponent').value == 2) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/ricFlair.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 3) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/goldDust.jpeg');
+                }
+                else if (document.querySelector('#opponent').value == 4) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/stoneCold.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 5) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/terryFunk.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 6) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/cactusjack.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 7) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/yokozuna.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 8) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/machoMan.jpeg');
+                }
+                else if (document.querySelector('#opponent').value == 9) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/BretHart.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 10) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/undertaker.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 20) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/sandman.JPG');
+                }
+                else if (document.querySelector('#opponent').value == 21) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/johnMox.jpg');
+                }
+                else if (document.querySelector('#opponent').value == 22) {
+                  console.log(document.querySelector('#opponent').value)
+                  $('#opponentImage').attr('src','/static/images/hulkHogan.jpg');
+                }
+                else
+                {
+                  $('#opponentImage').attr('src','/static/images/playerOne.jpg');
+                  console.log(document.querySelector('#opponent').value)
+                }
+            }
+
+      $(document).ready(selectWrestler);
+      document.querySelector('#opponent').onchange = selectWrestler;
+    </script>
+{% endblock %}

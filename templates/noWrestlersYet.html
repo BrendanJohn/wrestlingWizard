@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Howdy
+{% endblock %}
+
+{% block main %}
+        <p></p>
+        <p>New here? Why not <a href="/create">create</a> some wrestlers</p>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                 <div class="card border-dark mb-3" style="max-width: 20rem;">
+                 <div class="card-header">Tip</div>
+                 <d  iv class="card-body text-dark">
+                <h5 class="card-title">Leveling Up</h5>
+                     <p class="card-text">{{tips}}</p>
+                 </div>
+              </div>
+            <div class="col">
+            </div>
+        </div>
+{% endblock %}

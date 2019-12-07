@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block main %}
+    <h1>Users</h1>
+    <p>Last Updated: {{now}}</p>
+    <img class="titleBelt" src="/static/images/titleBelt.jpg" alt="world title">
+        <div class="table-responsive">
+        <table id="results-table" class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">User</th>
+              <th scope="col">Points</th>
+              <th scope="col">Total Wrestlers</th>
+              <th scope="col">Highest Ranked</th>
+              <th scope="col">Total Wins</th>
+              <th scope="col">Total Losses</th>
+            </tr>
+          </thead>
+          <tbody class="leaderBoard">
+        {% for user in userRowsObject %}
+            <tr>
+              <td>{{user["username"]}}</td>
+              <td>{{user["points"]}}</td>
+              <td>{{user["totalWrestlers"]}}</td>
+              <td>{{user["topWrestler"]}}</td>
+              <td>{{user["totalWins"]}}</td>
+              <td>{{user["totalLosses"]}}</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+        </div>
+            <p></p>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                  <div class="card border-dark mb-3" style="max-width: 20rem;">
+                  <div class="card-header">Tip</div>
+                  <d  iv class="card-body text-dark">
+                    <h5 class="card-title">Leveling Up</h5>
+                      <p class="card-text">{{tips}}</p>
+                  </div>
+               </div>
+                <div class="col">
+                </div>
+            </div>
+{% endblock %}
