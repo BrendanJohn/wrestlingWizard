@@ -68,7 +68,7 @@ def index():
     userid = session["user_id"]
     message = Markup("Looks like you don't have and wrestlers, why not <a href='/create'>create </a>one?")
     # get wrestlers for current user
-    wrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = 0", userid=userid)
+    wrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = False", userid=userid)
     if not wrestlers:
         return render_template("index.html", wrestlers=wrestlers, message=message, tips=random.choice(tips))
     else:
@@ -335,7 +335,7 @@ def match():
     outcome = ""
     overallResults = ""
     # get wrestlers for current user
-    myWrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = 0", userid=userid)
+    myWrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = False", userid=userid)
     # get computer generated wretlers
     compWrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = 0")
     random.shuffle(compWrestlers)
