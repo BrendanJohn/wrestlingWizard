@@ -9,7 +9,6 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology, login_required, lookup, usd
-from flask_msearch import Search
 
 # font aramanth
 # export API_KEY=pk_ad361175b32244dba6e634edd3714f80
