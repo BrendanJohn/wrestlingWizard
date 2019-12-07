@@ -84,7 +84,8 @@ def users():
         userItem = {
             "username": user['username'],
             "points": user['points'],
-            "totalWrestlers": (db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['COUNT(*)']),
+            # TODO fix this
+            "totalWrestlers": (db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['name']),
             "topWrestler": (db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['name']),
             "totalWins": (db.execute("SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['totalWins']),
             "totalLosses": (db.execute("SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['totalLosses']),
@@ -223,7 +224,7 @@ def quote():
 @login_required
 def delete():
     id = [request.form['entry_id']]
-    deleted = 1
+    deleted = True
     # delete a wrestler
     db.execute("UPDATE wrestlers SET deleted = :deleted WHERE id = :id", deleted=deleted, id=id)
     return redirect("/")
