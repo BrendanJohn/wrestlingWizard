@@ -84,10 +84,10 @@ def users():
         userItem = {
             "username": user['username'],
             "points": user['points'],
-            "totalWrestlers": (db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])[0]['COUNT(*)']),
-            "topWrestler": (db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])[0]['name']),
-            "totalWins": (db.execute("SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])[0]['totalWins']),
-            "totalLosses": (db.execute("SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])[0]['totalLosses']),
+            "totalWrestlers": (db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['COUNT(*)']),
+            "topWrestler": (db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['name']),
+            "totalWins": (db.execute("SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['totalWins']),
+            "totalLosses": (db.execute("SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])[0]['totalLosses']),
         }
         userRowsObject.append(userItem)
         userRowsObject.sort(key=operator.itemgetter('points'), reverse=True)
@@ -120,7 +120,7 @@ def leaderBoard():
     userid = session["user_id"]
     currentLeader = ""
     # get all wrestlers
-    wrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = 0")
+    wrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = False")
     leaderBoardRows = []
     for wrestler in wrestlers:
         leaderWrestler = {
@@ -337,7 +337,7 @@ def match():
     # get wrestlers for current user
     myWrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = False", userid=userid)
     # get computer generated wretlers
-    compWrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = 0")
+    compWrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = False")
     random.shuffle(compWrestlers)
     if request.method == "GET":
         if not myWrestlers:
@@ -346,9 +346,9 @@ def match():
             return render_template("match.html", overallResults=overallResults, myWrestlers=myWrestlers, compWrestlers=compWrestlers, outcome=outcome, tips=random.choice(tips))
 
     else:
-        wrestlerOne = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerOne and deleted = 0",
+        wrestlerOne = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerOne and deleted = False",
                                  wrestlerOne=request.form.get("wrestlerOne"))
-        wrestlerTwo = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerTwo and deleted = 0",
+        wrestlerTwo = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerTwo and deleted = False",
                                  wrestlerTwo=request.form.get("wrestlerTwo"))
         wrestlers = [wrestlerOne, wrestlerTwo]
         matchEvents = []
