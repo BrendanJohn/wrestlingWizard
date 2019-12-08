@@ -3,4 +3,4 @@ from flask_session import Session
 from tempfile import mkdtemp
 
 app = Flask(__name__)
-app.secret_key = "brendan"
+SECRET_KEY = "brendan"
