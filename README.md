@@ -1,5 +1,8 @@
 # User Manual
 
+## Local setup steps can be ignored, the app was deployed to Heroku
+https://wrestling-wizard.herokuapp.com/
+
 ## How to run The Wrestling Wizard
 
 Open a Terminal at the root of the application, i.e., the project directory. Once there, change directory into final using this command:

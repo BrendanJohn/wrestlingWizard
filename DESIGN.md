@@ -16,4 +16,4 @@ compete for the 'heavyweight championship'. They gave me lots of good feedback, 
 functionality, which was a far greater effort than I realized and I ended up abandoning the pursuit after a few unsuccessful attempts. I had also hoped to implement a
 feature that would allow users to bet on the outcome of a match using their points as a bank, but I never got that far as I got too bogged down
 with the mechanics of the game and with making it look nice on mobile platforms. Lastly, on the night before this was due, I decided to deploy it to Heroku, which was largely unsuccessful
-at first. However, after many, many, many hours of trial and error, I have the application deployed (somewhat) sucessfully. Enjoy! https://wrestling-wizard.herokuapp.com/
+at first. However, after many, many, many hours of trial and error, I have the application deployed sucessfully. Enjoy! https://wrestling-wizard.herokuapp.com/
