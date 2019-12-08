@@ -18,12 +18,12 @@ from helpers import apology, login_required, lookup, usd
 # CREATE TABLE IF NOT EXISTS 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'username' TEXT NOT NULL, 'hash' TEXT NOT NULL, 'points' NUMERIC NOT NULL DEFAULT 10000.00 );
 # Configure application
 app = Flask(__name__)
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 # Configure session to use filesystem (instead of signed cookies)
 #app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 #app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
