@@ -18,11 +18,11 @@ from helpers import apology, login_required, lookup, usd
 # Configure application
 app = Flask(__name__)
 # Configure session to use filesystem (instead of signed cookies)
-# app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+# app.config["SESSION_FILE_DIR"] = mkdtemp()
 Session(app)
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+#app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -37,10 +37,10 @@ def after_request(response):
 
 
 # Configure CS50 Library to use SQLite database
-#db = SQL("sqlite:///wrestling.db")
+db = SQL("sqlite:///wrestling.db")
 
 # heroku db configuration
-db = SQL("postgres://qlcblfutafjovf:0ae0b6fbd8c878a4b9acd493afa8e600f7dda34a22efa58e2d75d0a9d0351ef9@ec2-54-221-212-126.compute-1.amazonaws.com:5432/d46a5n1cr97lsj")
+# db = SQL("postgres://qlcblfutafjovf:0ae0b6fbd8c878a4b9acd493afa8e600f7dda34a22efa58e2d75d0a9d0351ef9@ec2-54-221-212-126.compute-1.amazonaws.com:5432/d46a5n1cr97lsj")
 
 # datetime object containing current date and time
 now = datetime.now()
@@ -68,7 +68,7 @@ def index():
     userid = session["user_id"]
     message = Markup("Looks like you don't have and wrestlers, why not <a href='/create'>create </a>one?")
     # get wrestlers for current user
-    wrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = False", userid=userid)
+    wrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = 0", userid=userid)
     if not wrestlers:
         return render_template("index.html", wrestlers=wrestlers, message=message, tips=random.choice(tips))
     else:
@@ -81,13 +81,13 @@ def users():
     userRows = db.execute("SELECT * FROM users;")
     userRowsObject = []
     for user in userRows:
-        totalWrestlers = db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+        totalWrestlers = db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])
         topWrestler = db.execute(
-            "SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+            "SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])
         totalWins = db.execute(
-            "SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+            "SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])
         totalLosses = db.execute(
-            "SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+            "SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = 0", userid=user['id'])
         userItem = {
             "username": user['username'],
             "points": user['points'],
@@ -127,7 +127,7 @@ def leaderBoard():
     userid = session["user_id"]
     currentLeader = ""
     # get all wrestlers
-    wrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = False")
+    wrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = 0")
     leaderBoardRows = []
     for wrestler in wrestlers:
         leaderWrestler = {
@@ -342,9 +342,9 @@ def match():
     outcome = ""
     overallResults = ""
     # get wrestlers for current user
-    myWrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = False", userid=userid)
+    myWrestlers = db.execute("SELECT * FROM wrestlers WHERE userid = :userid and deleted = 0", userid=userid)
     # get computer generated wretlers
-    compWrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = False")
+    compWrestlers = db.execute("SELECT * FROM wrestlers WHERE deleted = 0")
     random.shuffle(compWrestlers)
     if request.method == "GET":
         if not myWrestlers:
@@ -353,9 +353,9 @@ def match():
             return render_template("match.html", overallResults=overallResults, myWrestlers=myWrestlers, compWrestlers=compWrestlers, outcome=outcome, tips=random.choice(tips))
 
     else:
-        wrestlerOne = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerOne and deleted = False",
+        wrestlerOne = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerOne and deleted = 0",
                                  wrestlerOne=request.form.get("wrestlerOne"))
-        wrestlerTwo = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerTwo and deleted = False",
+        wrestlerTwo = db.execute("SELECT * FROM wrestlers WHERE id = :wrestlerTwo and deleted = 0",
                                  wrestlerTwo=request.form.get("wrestlerTwo"))
         wrestlers = [wrestlerOne, wrestlerTwo]
         matchEvents = []
