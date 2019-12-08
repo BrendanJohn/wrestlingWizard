@@ -1,7 +1,6 @@
 import os
 import operator
 import random
-import memcache
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, Markup
 from flask_session import Session
@@ -21,7 +20,6 @@ app = Flask(__name__)
 # Configure session to use filesystem (instead of signed cookies)
 #app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
-app.config['SESSION_TYPE'] = 'memcached'
 Session(app)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
