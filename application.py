@@ -17,6 +17,7 @@ from helpers import apology, login_required, lookup, usd
 # CREATE TABLE IF NOT EXISTS 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'username' TEXT NOT NULL, 'hash' TEXT NOT NULL, 'points' NUMERIC NOT NULL DEFAULT 10000.00 );
 # Configure application
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -37,7 +38,6 @@ app.jinja_env.filters["usd"] = usd
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.secret_key = os.urandom(24)
 Session(app)
 
 # Configure CS50 Library to use SQLite database
@@ -82,8 +82,8 @@ def users():
     userRows = db.execute("SELECT * FROM users;")
     userRowsObject = []
     for user in userRows:
-        totalWrestlers = db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
-        topWrestler: db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+            totalWrestlers = db.execute("SELECT COUNT(*) FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
+            topWrestler: db.execute("SELECT MAX(wins) AS totalWins, name FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
             totalWins: db.execute("SELECT MAX(wins) AS totalWins FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
             totalLosses: db.execute("SELECT MAX(losses) AS totalLosses FROM wrestlers WHERE userid = :userid and deleted = False", userid=user['id'])
         userItem = {
