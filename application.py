@@ -20,11 +20,7 @@ app = Flask(__name__)
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-
-app.secret_key = None
-# app.secret_key = config.get_value(config.APP_SECRET_KEY)
-if app.secret_key is None:
-    app.secret_key = 'e5fce5faa2e20b203c014f358f73c48f7129084ab1643c9fa6a0f87ff7a546a2'
+app.secret_key = 'e5fce5faa2e20b203c014f358f73c48f7129084ab1643c9fa6a0f87ff7a546a2'
 
 Session(app)
 # Ensure templates are auto-reloaded
