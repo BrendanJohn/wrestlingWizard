@@ -1,6 +1,7 @@
 import os
 import operator
 import random
+import config
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, Markup
 from flask_session import Session
