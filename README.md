@@ -1,8 +1,8 @@
 # User Manual
 
-## How to run the wrestling wizard
+## How to run The Wrestling Wizard
 
-Open a terminal at the root of the application, i.e., the project directory. Once there, change directory into final using this command:
+Open a Terminal at the root of the application, i.e., the project directory. Once there, change directory into final using this command:
 
 cd final
 
@@ -10,17 +10,17 @@ Next, start the application using this command:
 
 flask run
 
-The terminal window will output a url to access a live version of the application, copy it into clipboard and paste it into the url bar of any web browser
+The Terminal window will output a URL to access a live version of the application. Copy and paste it into the URL bar of any web browser.
 
-## How to register a user for the  wrestling wizard
+## How to register a user in The Wrestling Wizard
 
-Use the register link to create an account. There are no complexity requirements around username and password, however the password inputs must match
+Use the register link to create an account. There are no complexity requirements around username and password, except that the password inputs must match.
 
-## How to use the wrestling wizard
+## How to use The Wrestling Wizard
 
-After you have created a user, log in and navigate to the create page. Here, you can create a new wrestler to begin the journey of becoming the champion
+After you have created a user, log in and navigate to the create page. Here, you can create a new wrestler to begin the journey of becoming the champion.
 
-## matches
+## Matches
 
 Matches are the bread and butter of the application. Here, you can compete against the wrestlers that other users have created. The match outcomes are randomly determined
 with a slightly weighted probability that the winner is the wrestler with the higher level. Wrestlers level up and gain health as more and more matches
