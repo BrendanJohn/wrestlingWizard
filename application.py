@@ -416,14 +416,14 @@ def match():
             "winnerId": winner[0]["id"],
             "loserName": loser[0]["name"],
             "loserId": loser[0]["id"],
-            "date": date_string,
+            "date": datetime.now().strftime("%m/%d/%Y %H:%M:%S"),
             "finalHealth": finalHealth,
             "finalBlow": finalBlow,
             "totalMoves": totalMoves
         }
         # insert a row into matches table
         db.execute("INSERT INTO matches (wrestlerOne, wrestlerTwo, winnerId, loserId, date) VALUES (:wrestlerOne, :wrestlerTwo, :winnerId, :loserId, :date)",
-                   wrestlerOne=wrestlerOne[0]["id"], wrestlerTwo=wrestlerTwo[0]["id"], winnerId=overallResults["winnerId"], loserId=overallResults["loserId"], date=date_string)
+                   wrestlerOne=wrestlerOne[0]["id"], wrestlerTwo=wrestlerTwo[0]["id"], winnerId=overallResults["winnerId"], loserId=overallResults["loserId"], date=datetime.now().strftime("%m/%d/%Y %H:%M:%S"))
 
         # update the wrestlers win/loss/points records
         db.execute("UPDATE wrestlers SET wins = wins + 1 WHERE id = :id", id=overallResults["winnerId"])
