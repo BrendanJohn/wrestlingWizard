@@ -60,10 +60,10 @@ tips = ["Each time a wrestler increases by one level their health points grow by
         "Due to his size, Yokuzuna has a custom strength level, and Almost no speed",
         "Your goal: Become the World Champion!!",
         "Regardless of the outcome, a match will earn you 25 points",
-        "Actor David Arqutte won the WCW World Championship in the year 2000"]
+        "Actor David Arqutte won the WCW World Championship in the year 2000",
+        "The longest reigning champion in WWE history is Bruno Sammartino, who held the title from May 17, 1963 to January 18, 1971, for a total of 2,803 days",
+        "In a battle in 1983 against The Iron Sheik, Hulk Hogan managed to be the first person to ever get out of the dreaded 'camel clutch,' the Sheik's finishing move. He followed that up with his trademark leg drop, winning his first ever WWF Championship title."]
 
-
-tipsAndFacts = []
 
 @app.route("/")
 @login_required
