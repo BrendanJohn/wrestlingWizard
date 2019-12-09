@@ -1,13 +1,10 @@
 # User Manual
 
-## Local setup steps can be ignored, the app was deployed to Heroku
-https://wrestling-wizard.herokuapp.com/
+## What is the The Wrestling Wizard?
+The Wrestling wizard is a web-based application that allows authenticated users the ability to create wrestlers and compete in matches. Wrestlers level up as they complete matches which
+improves attributes like speed, strength, and health. The goal of the game is to acquire the world heavyweight championship, which is tracked on a leaderboard.
 
-## Test user
-username: test
-password: test
-
-## How to register a user in The Wrestling Wizard
+## How to register a new user in The Wrestling Wizard
 
 Use the register link to create an account. There are no complexity requirements around username and password, except that the password inputs must match.
 
@@ -20,6 +17,14 @@ After you have created a user, log in and navigate to the create page. Here, you
 Matches are the bread and butter of the application. Here, you can compete against the wrestlers that other users have created. The match outcomes are randomly determined
 with a slightly weighted probability that the winner is the wrestler with the higher level. Wrestlers level up and gain health as more and more matches
 are completed.
+
+## Test user
+username: test
+password: test
+
+## Local setup steps below can be ignored, the app was deployed to Heroku
+https://wrestling-wizard.herokuapp.com/
+
 
 ## How to run The Wrestling Wizard
 
