@@ -10,8 +10,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology, login_required, lookup, usd
 
-# font aramanth
-# export API_KEY=pk_ad361175b32244dba6e634edd3714f80
 # CREATE TABLE 'matches' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 'wrestlerOne' INTEGER NOT NULL, 'wrestlerTwo' INTEGER NOT NULL, 'winnerId' INTEGER, 'loserId' INTEGER, 'date' DATE NOT NULL, FOREIGN KEY(wrestlerOne) REFERENCES wrestlers(id), FOREIGN KEY(wrestlerTwo) REFERENCES wrestlers(id), FOREIGN KEY(winnerId) REFERENCES wrestlers(id), FOREIGN KEY(loserId) REFERENCES wrestlers(id));
 # CREATE TABLE 'wrestlers' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 'userid' INTEGER NOT NULL, 'name' TEXT NOT NULL, 'specialMove' TEXT NOT NULL, 'strength' NUMERIC NOT NULL, 'speed' NUMERIC NOT NULL, 'health' NUMERIC NOT NULL, 'finishingMove' TEXT NOT NULL, 'wins' NUMERIC NOT NULL, 'losses' NUMERIC NOT NULL, 'level' NUMERIC NOT NULL, 'isChampion' BOOLEAN NOT NULL, 'deleted' BOOLEAN NOT NULL, FOREIGN KEY(userid) REFERENCES users(id));
 # CREATE TABLE IF NOT EXISTS 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'username' TEXT NOT NULL, 'hash' TEXT NOT NULL, 'points' NUMERIC NOT NULL DEFAULT 10000.00 );
@@ -41,18 +39,6 @@ db = SQL("sqlite:///wrestling.db")
 
 # heroku db configuration
 # db = SQL("postgres://qlcblfutafjovf:0ae0b6fbd8c878a4b9acd493afa8e600f7dda34a22efa58e2d75d0a9d0351ef9@ec2-54-221-212-126.compute-1.amazonaws.com:5432/d46a5n1cr97lsj")
-
-# datetime object containing current date and time
-# now = datetime.now()
-
-# dd/mm/YY H:M:S
-# date_string = now.strftime("%m/%d/%Y %H:%M:%S")
-
-# date for leaderboard
-# dateForBoard = now.strftime("%m/%d/%Y %H:%M")
-
-# current leader
-currentLeader = ''
 
 # user tips
 tips = ["Each time a wrestler increases by one level their health points grow by 10",
@@ -267,6 +253,7 @@ def register():
 def damageDealer(wrestlerOne, wrestlerTwo):
     wrestlers = [wrestlerOne, wrestlerTwo]
     actionList = ["Punch", "Kick", "Special move", "Finishing move", "Irish whip", "Power bomb"]
+    # determine the attacker/victim of a given event
     attacker = random.choice(wrestlers)
     damageNums = range(10)
     damagePoints = random.choice(damageNums)
