@@ -59,7 +59,7 @@ tips = ["Each time a wrestler increases by one level their health points grow by
         "The level bonus magnifies the impact of an attack greatly. Be careful challenging a wrestler with a level much higher than yours",
         "Due to his size, Yokuzuna has a custom strength level, and Almost no speed",
         "Your goal: Become the World Champion!!",
-        "A fan was accidentally set on fire during a match at the ECW Arena in 1995",
+        "A fan was accidentally set on fire during a match at the ECW Arena in 1995"
         "Regardless of the outcome, a match will earn you 25 points",
         "Actor David Arqutte won the WCW World Championship in the year 2000",
         "The longest reigning champion in WWE history is Bruno Sammartino, who held the title from May 17, 1963 to January 18, 1971, for a total of 2,803 days",
