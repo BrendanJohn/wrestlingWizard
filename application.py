@@ -37,19 +37,19 @@ def after_request(response):
 
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///wrestling.db")
+# db = SQL("sqlite:///wrestling.db")
 
 # heroku db configuration
-# db = SQL("postgres://qlcblfutafjovf:0ae0b6fbd8c878a4b9acd493afa8e600f7dda34a22efa58e2d75d0a9d0351ef9@ec2-54-221-212-126.compute-1.amazonaws.com:5432/d46a5n1cr97lsj")
+db = SQL("postgres://qlcblfutafjovf:0ae0b6fbd8c878a4b9acd493afa8e600f7dda34a22efa58e2d75d0a9d0351ef9@ec2-54-221-212-126.compute-1.amazonaws.com:5432/d46a5n1cr97lsj")
 
 # datetime object containing current date and time
-now = datetime.now()
+# now = datetime.now()
 
 # dd/mm/YY H:M:S
-date_string = now.strftime("%m/%d/%Y %H:%M:%S")
+# date_string = now.strftime("%m/%d/%Y %H:%M:%S")
 
 # date for leaderboard
-dateForBoard = now.strftime("%m/%d/%Y %H:%M")
+# dateForBoard = now.strftime("%m/%d/%Y %H:%M")
 
 # current leader
 currentLeader = ''
@@ -102,7 +102,7 @@ def users():
         }
         userRowsObject.append(userItem)
         userRowsObject.sort(key=operator.itemgetter('points'), reverse=True)
-    return render_template("users.html", tips=random.choice(tips), now=dateForBoard, userRowsObject=userRowsObject)
+    return render_template("users.html", tips=random.choice(tips), now=datetime.now().strftime("%m/%d/%Y %H:%M:%S"), userRowsObject=userRowsObject)
 
 
 @app.route("/history")
@@ -149,7 +149,7 @@ def leaderBoard():
         if (wrestler["rank"] == 1):
             currentLeader = wrestler["name"]
 
-    return render_template("leaderboard.html", leaderBoardRows=leaderBoardRows, now=dateForBoard, currentLeader=currentLeader, tips=random.choice(tips))
+    return render_template("leaderboard.html", leaderBoardRows=leaderBoardRows, now=datetime.now().strftime("%m/%d/%Y %H:%M:%S"), currentLeader=currentLeader, tips=random.choice(tips))
 
 
 def sortBy(element):
