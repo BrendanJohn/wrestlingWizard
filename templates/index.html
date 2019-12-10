@@ -38,7 +38,7 @@
               <td>{{wrestler["health"]}}</td>
               <form action="/delete" method="post">
                 <input type="hidden" name="entry_id" value="{{wrestler["id"]}}">
-                <td><button id="deleteButton" onclick="areYouSure()" class="btn btn-danger" type="submit">Delete Wrestler</button></td>
+                <td><button id="deleteButton" onclick="return areYouSure()" class="btn btn-danger" type="submit">Delete Wrestler</button></td>
                </form>
             </tr>
         {% endfor %}
