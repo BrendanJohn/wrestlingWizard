@@ -26,7 +26,7 @@ password: test
 https://wrestling-wizard.herokuapp.com/
 
 
-## How to run The Wrestling Wizard
+## How to run The Wrestling Wizard locally
 
 Open a Terminal at the root of the application, i.e., the project directory. Once there, change directory into final using this command:
 
